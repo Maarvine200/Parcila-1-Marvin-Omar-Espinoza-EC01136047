@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <style>
+        .oscuro {
+            background-color: #333;
+            color: #fff;
+        }
+        .claro {
+            background-color: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" :class="tema">
+        <button @click="toggleTema">Cambiar a {{ tema === 'claro' ? 'oscuro' : 'claro' }}</button>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue;
+
+        createApp({
+            setup() {
+                const tema = ref('claro');
+
+                function toggleTema() {
+                    tema.value = tema.value === 'claro' ? 'oscuro' : 'claro';
+                }
+
+                return { tema, toggleTema };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

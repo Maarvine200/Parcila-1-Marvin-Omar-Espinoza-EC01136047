@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <input v-model.number="num1" type="number" placeholder="Número 1">
+        <input v-model.number="num2" type="number" placeholder="Número 2">
+        <button @click="calcular('+')">Sumar</button>
+        <button @click="calcular('-')">Restar</button>
+        <button @click="calcular('*')">Multiplicar</button>
+        <button @click="calcular('/')">Dividir</button>
+        <p>Resultado: {{ resultado }}</p>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue;
+
+        createApp({
+            setup() {
+                const num1 = ref(0);
+                const num2 = ref(0);
+                const resultado = ref(0);
+
+                function calcular(operacion) {
+                    switch (operacion) {
+                        case '+':
+                            resultado.value = num1.value + num2.value;
+                            break;
+                        case '-':
+                            resultado.value = num1.value - num2.value;
+                            break;
+                        case '*':
+                            resultado.value = num1.value * num2.value;
+                            break;
+                        case '/':
+                            resultado.value = num2.value !== 0 ? num1.value / num2.value : 'Error';
+                            break;
+                    }
+                }
+
+                return { num1, num2, resultado, calcular };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

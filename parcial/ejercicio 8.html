@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <mensaje-de-condicion :esPositivo="esPositivo"></mensaje-de-condicion>
+        <button @click="toggleCondicion">Cambiar condición</button>
+    </div>
+
+    <script>
+        const { createApp, defineComponent, ref } = Vue;
+
+        const MensajeDeCondicion = defineComponent({
+            props: ['esPositivo'],
+            template: `
+                <div>
+                    <p v-if="esPositivo">El valor es positivo.</p>
+                    <p v-else>El valor es negativo o cero.</p>
+                </div>
+            `
+        });
+
+        createApp({
+            components: { MensajeDeCondicion },
+            setup() {
+                const esPositivo = ref(true);
+
+                function toggleCondicion() {
+                    esPositivo.value = !esPositivo.value;
+                }
+
+                return { esPositivo, toggleCondicion };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

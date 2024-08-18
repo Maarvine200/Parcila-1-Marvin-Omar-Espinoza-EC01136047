@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <nombre-completo :nombre="nombre" :apellido="apellido"></nombre-completo>
+    </div>
+
+    <script>
+        const { createApp, defineComponent, computed, ref } = Vue;
+
+        // Definición del componente NombreCompleto
+        const NombreCompleto = defineComponent({
+            props: ['nombre', 'apellido'],
+            setup(props) {
+                const nombreCompleto = computed(() => `${props.nombre} ${props.apellido}`);
+                return { nombreCompleto };
+            },
+            template: '<p>Nombre completo: {{ nombreCompleto }}</p>'
+        });
+
+        // Creación y montaje de la aplicación
+        createApp({
+            components: {
+                NombreCompleto
+            },
+            setup() {
+                const nombre = ref('Marvin');
+                const apellido = ref('Espinoza');
+
+                return { nombre, apellido };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

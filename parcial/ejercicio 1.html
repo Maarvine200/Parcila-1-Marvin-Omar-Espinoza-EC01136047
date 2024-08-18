@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ mensajeDeBienvenida }}</h1>
+    </div>
+
+    <script>
+        const { createApp, reactive, computed } = Vue;
+
+        createApp({
+            setup() {
+                const estado = reactive({
+                    nombre: ''
+                });
+
+                // Utilizamos computed para actualizar el mensaje de bienvenida
+                const mensajeDeBienvenida = computed(() => `Bienvenido ${estado.nombre}`);
+
+                return { mensajeDeBienvenida };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

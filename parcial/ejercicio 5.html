@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <input v-model="nuevaTarea" type="text" placeholder="Nueva tarea">
+        <button @click="agregarTarea">Agregar tarea</button>
+        <ul>
+            <li v-for="(tarea, index) in tareas" :key="index">
+                {{ tarea }}
+                <button @click="eliminarTarea(index)">Eliminar</button>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue;
+
+        createApp({
+            setup() {
+                const nuevaTarea = ref('');
+                const tareas = ref([]);
+
+                function agregarTarea() {
+                    if (nuevaTarea.value.trim()) {
+                        tareas.value.push(nuevaTarea.value);
+                        nuevaTarea.value = '';
+                    }
+                }
+
+                function eliminarTarea(index) {
+                    tareas.value.splice(index, 1);
+                }
+
+                return { nuevaTarea, tareas, agregarTarea, eliminarTarea };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
